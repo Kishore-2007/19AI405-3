@@ -1,7 +1,7 @@
 # BREADTH-FIRST-SEARCH
 <h1>ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1> 
-<h3>Name:  </h3>
-<h3>Register Number: </h3>
+<h3>Name: Kishore S</h3>
+<h3>Register Number: 212224230130</h3>
 <H3>Aim:</H3>
 <p>To Implement Breadth First Search Traversal of a Graph using Python 3.</p>
 <h3>Theory:</h3>
@@ -69,6 +69,37 @@ Now, Queue becomes empty, So, terminate these process of iteration.
 </ol>
 
 <hr>
+<h3>Program:</h3>
+
+```python
+from collections import defaultdict
+
+def dfs(graph,start,stop,path):
+    path.append(start)
+    visited[start]=True
+    for nei in graph[start]:
+        if visited[nei] == False:
+            dfs(graph,nei,stop,path)
+    return path
+
+graph = defaultdict(list)
+n, e = map(int, input().split())
+n,s=0,""
+for i in range(e):
+    u, v = map(str, input().split())
+    if n==0:
+        s=str(u)
+    graph[u].append(v)
+    graph[v].append(u)
+    n+=1
+
+start = s
+visited = defaultdict(bool)
+path = []
+traversedpath = dfs(graph, start, visited, path)
+print(traversedpath)
+```
+
 <h3>Sample Input</h3>
 <hr>
 7 9 <BR>
@@ -84,7 +115,7 @@ G F <BR>
 <hr>
 <h3>Sample Output</h3>
 <hr>
-['A', 'B', 'C', 'F', 'E', 'D', 'G']
+<img width="558" height="253" alt="image" src="https://github.com/user-attachments/assets/36db5ecc-9126-4245-86ab-ff2f17105786" />
 
 <hr>
 
@@ -101,7 +132,8 @@ G F <BR>
 <hr>
 <h3>Sample Output</h3>
 <hr>
-['0', '1', '2', '3', '4']
+<img width="518" height="196" alt="image" src="https://github.com/user-attachments/assets/f8319bfc-c271-4723-8c27-a16c10c4fced" />
+
 <hr>
 <h3>Result:</h3>
 <hr>
