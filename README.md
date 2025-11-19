@@ -72,34 +72,37 @@ Now, Queue becomes empty, So, terminate these process of iteration.
 <h3>Program:</h3>
 
 ```python
+from collections import deque
 from collections import defaultdict
-
-def dfs(graph,start,stop,path):
+def bfs(graph,start,visited,path):
+    queue = deque()
     path.append(start)
-    visited[start]=True
-    for nei in graph[start]:
-        if visited[nei] == False:
-            dfs(graph,nei,stop,path)
+    queue.append(start)
+    visited[start] = True
+    while len(queue) != 0:
+        tmpnode = queue.popleft()
+        for neighbour in graph[tmpnode]:
+            if visited[neighbour]==False:
+                path.append(neighbour)
+                queue.append(neighbour)
+                visited[neighbour]=True
     return path
 
 graph = defaultdict(list)
-n, e = map(int, input().split())
-n,s=0,""
+v,e = map(int,input().split())
 for i in range(e):
-    u, v = map(str, input().split())
-    if n==0:
-        s=str(u)
+    u,v = map(str,input().split())
     graph[u].append(v)
     graph[v].append(u)
-    n+=1
 
-start = s
-visited = defaultdict(bool)
+start = '0' if '0' in graph else 'A'
 path = []
-traversedpath = dfs(graph, start, visited, path)
+visited = defaultdict(bool)
+traversedpath = bfs(graph,start,visited,path)
 print(traversedpath)
 ```
 
+<hr>
 <h3>Sample Input</h3>
 <hr>
 7 9 <BR>
@@ -115,7 +118,7 @@ G F <BR>
 <hr>
 <h3>Sample Output</h3>
 <hr>
-<img width="558" height="253" alt="image" src="https://github.com/user-attachments/assets/36db5ecc-9126-4245-86ab-ff2f17105786" />
+['A', 'B', 'C', 'F', 'E', 'D', 'G']
 
 <hr>
 
@@ -132,7 +135,13 @@ G F <BR>
 <hr>
 <h3>Sample Output</h3>
 <hr>
-<img width="518" height="196" alt="image" src="https://github.com/user-attachments/assets/f8319bfc-c271-4723-8c27-a16c10c4fced" />
+['0', '1', '2', '3', '4']
+
+## OUTPUT : 
+
+<img width="619" height="252" alt="image" src="https://github.com/user-attachments/assets/dfcdaa12-7306-4cca-b2f5-9cab412f29ad" />
+
+<img width="495" height="199" alt="image" src="https://github.com/user-attachments/assets/21d7723f-bba0-41fe-8678-e775dc8ae88f" />
 
 <hr>
 <h3>Result:</h3>
